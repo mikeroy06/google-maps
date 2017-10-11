@@ -1,0 +1,61 @@
+
+
+$(document).ready(function (){
+
+    function initialize() {
+    var myCoords = new google.maps.LatLng(latitude, longitude);
+
+    var sites = [
+    ['Paris', 48.863143, 2.35222, 1],
+	  ['London', 51.534288, -0.123606, 2],
+	  ['Tokyo', 35.727101, 139.733816, 3],
+	  ['Munich', 48.14129, 11.582321, 4],
+	  ['Atlanta', 33.762011, -84.390608, 5],
+	  ['Los Angeles', 34.0522342, -118.2436849, 6]
+	  
+
+
+
+
+    ]
+    
+
+      var mapOptions = {
+      center: myCoords,
+      zoom: 18,
+      scrollwheel: false  
+
+      };
+        
+      var map = new google.maps.Map(document.getElementById('destination-map'),
+                mapOptions);  
+
+       var image = "<%= asset_path 'tts.png'%>"
+    
+
+	    var marker = new google.maps.Marker({
+		  position: myCoords,
+		  map: map,
+		  title: 'TTS',
+		  icon: image,
+		  animation: google.maps.Animation.DROP
+		});
+		  
+
+		  var contentString = '<h2>' + address + '</h2>'
+   
+
+ 			var infowindow = new google.maps.InfoWindow({
+		   content: contentString
+		 });
+
+ google.maps.event.addListener(marker, 'click', function() {
+    infowindow.open(map,marker);
+ });
+
+}
+
+
+      
+    google.maps.event.addDomListener(window, 'load', initialize);
+});
